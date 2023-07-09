@@ -18,25 +18,29 @@ int main()
 // } Driver Code Ends
 
 
-int longestSubstrDistinctChars(string s) {
-    int count[26] = {0};
-    int first = 0;
-    int res = 0;
-    int temp = 0;
-    
-    for (int second = 0; second < s.size(); second++) {
-        count[s[second] - 'a']++;
-        
-        // Check if a character is repeated
-        while (count[s[second] - 'a'] > 1) {
-            count[s[first] - 'a']--;
-            first++;
-            temp--;
+int longestSubstrDistinctChars(string S) {
+    int n = S.length(); // length of the string
+    int maxLength = 0; // length of the longest substring
+    unordered_set<char> distinctChars; // set to store distinct characters
+
+    int left = 0; // left pointer
+    int right = 0; // right pointer
+
+    while (right < n) {
+        // If the current character is not present in the set
+        if (distinctChars.find(S[right]) == distinctChars.end()) {
+            // Add the character to the set and move the right pointer
+            distinctChars.insert(S[right]);
+            maxLength = max(maxLength, right - left + 1);
+            right++;
         }
-        
-        temp++;
-        res = max(temp, res);
+        else {
+            // If the current character is already present in the set
+            // Remove the character at the left pointer from the set
+            distinctChars.erase(S[left]);
+            left++;
+        }
     }
-    
-    return res;
+
+    return maxLength;
 }
