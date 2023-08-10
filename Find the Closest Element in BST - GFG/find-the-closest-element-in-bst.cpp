@@ -37,30 +37,22 @@ class Solution
     public:
     //Function to find the least absolute difference between any node
 	//value of the BST and the given integer.
-	vector<int> find(Node* root, int K,vector<int>&check)
-	{
-	    vector<int> ans;
-	    if(!root)
-	    return check;
-	    
-	    find(root->left , K,check);
-	    check.push_back(abs(root->data - K));
-	    find(root->right,K,check);
-	    
-	    return check;
-	}
-	
     int minDiff(Node *root, int K)
     {
-        vector<int>check;
-        find(root ,K,check);
-        int mini = INT_MAX;
-        for(int i=0;i<check.size();i++)
-        {
-            mini = min(mini,check[i]);
-        }
+        if(!root)
+        return INT_MAX;
         
-        return mini;
+        if(K == root->data)
+        return 0;
+        
+        else if(K < root->data)
+        {
+            return min(abs(K-root->data) ,minDiff(root->left ,K));
+        }
+        else 
+        {
+            return min(abs(root->data - K) ,minDiff(root->right,K));
+        }
     }
 };
 
