@@ -22,14 +22,30 @@ struct Node {
 class Solution
 {
     public:
+    //Function to check whether a Binary Tree is BST or not.
     
-    bool isBST(Node* root, int left = INT_MIN, int right = INT_MAX) 
+    void find(Node* root , int max , int min , bool &ans)
     {
-        if(root==NULL) return true;
-        if(root->data<=left || root->data>=right) return false;
-        return isBST(root->left, left, root->data) && isBST(root->right, root->data, right);
+        if(!root)
+        return;
+        find(root->left , root->data , min,ans);
+        if(root->data >= max || root->data <= min)
+        {
+            ans = 0;
+            return;
+        }
+        find(root->right,max , root->data,ans);
+    }
+    
+    bool isBST(Node* root) 
+    {
+       bool ans = 1;
+       find (root ,INT_MAX , INT_MIN,ans);
+       return ans;
     }
 };
+
+
 
 
 //{ Driver Code Starts.
