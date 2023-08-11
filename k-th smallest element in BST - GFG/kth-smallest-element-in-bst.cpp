@@ -93,33 +93,30 @@ struct Node {
 
 class Solution {
   public:
-   
-   void krsna(Node* root , int &k , int &ans,int & i )
-   {
-       
-       
-       if(!root or k==0)
-       return;
-       
-       krsna(root->left , k  ,ans,i);
-       
-       i++;
-       k--;
-       if(k==0)
-       {
-           ans = root->data;
-           return;
-       }
-       krsna(root->right,k,ans,i);
-   }
-   
-    int KthSmallestElement(Node *root, int K) {
-        int ans =-1;
-        int  i = 0;
-        krsna(root , K, ans,i);
-        if(i < K)return -1;
-        return ans;
-    }
+    // Return the Kth smallest element in the given BST
+     int ans = -1;
+
+    int KthSmallestElement(Node *root, int& K) {
+
+        if(!root){
+
+            return -1;
+
+        }
+
+        KthSmallestElement(root->left, K);
+
+        K--;
+
+        if(K==0){
+
+            return ans = root->data;
+
+        }
+
+        KthSmallestElement(root->right,  K);
+
+        return ans;}
 };
 
 
