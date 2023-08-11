@@ -105,7 +105,6 @@ class Solution
     k--;
     if (k == 0) {
         ans = root->data;
-        return;
     }
     find(root->left, k, ans);
 }
