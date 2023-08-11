@@ -93,31 +93,35 @@ struct Node {
 
 class Solution {
   public:
-    // Return the Kth smallest element in the given BST
-    int help(Node* root, int &K) {
-    if (!root)
-        return -1;
-
-    int leftResult = help(root->left, K);
-    
-    if (K == 0)
-        return leftResult;
-
-    K--;
-    
-    if (K == 0)
-        return root->data;
-
-    int rightResult = help(root->right, K);
-
-    return (leftResult != -1) ? leftResult : rightResult;
-}
-
-int KthSmallestElement(Node* root, int K) {
-    return help(root, K);
-}
-
+   
+   void krsna(Node* root , int &k , int &ans,int & i )
+   {
+       
+       
+       if(!root or k==0)
+       return;
+       
+       krsna(root->left , k  ,ans,i);
+       
+       i++;
+       k--;
+       if(k==0)
+       {
+           ans = root->data;
+           return;
+       }
+       krsna(root->right,k,ans,i);
+   }
+   
+    int KthSmallestElement(Node *root, int K) {
+        int ans =-1;
+        int  i = 0;
+        krsna(root , K, ans,i);
+        if(i < K)return -1;
+        return ans;
+    }
 };
+
 
 //{ Driver Code Starts.
 int main() {
