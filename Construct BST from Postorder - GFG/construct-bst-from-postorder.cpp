@@ -62,8 +62,8 @@ Node* create(int post[], int left, int right, int& i) {
     Node* root = new Node(post[i]);
     i--;
 
-    root->right = create(post, root->data + 1, right, i);
-    root->left = create(post, left, root->data - 1, i);
+    root->right = create(post, root->data , right, i);
+    root->left = create(post, left, root->data , i);
 
     return root;
 }
