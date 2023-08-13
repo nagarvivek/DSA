@@ -100,16 +100,18 @@ Node * right, * left;
 class Solution{
   public:
     /*The function should return the root of the modified tree*/
-    Node* deleteNode(Node* root, int k) {
-    if (!root) {
+    Node* deleteNode(Node* root, int k)
+{
+    if (!root)
+    {
         return root;
     }
 
-    if (root->data >= k) {
-        Node* temp = root;
-        root = root->left;
-        delete temp;
-        return deleteNode(root, k);
+    if (root->data >= k)
+    {
+        Node* temp = root->left;
+        delete root;
+        return deleteNode(temp, k);
     }
 
     root->right = deleteNode(root->right, k);
@@ -118,6 +120,7 @@ class Solution{
 }
 
 };
+
 
 
 //{ Driver Code Starts.
