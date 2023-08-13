@@ -114,7 +114,10 @@ class Solution{
         return deleteNode(temp, k);
     }
 
-    root->right = deleteNode(root->right, k);
+    else if(root->data < k)
+        {
+            root->right = deleteNode(root->right,k);
+        }
 
     return root;
 }
